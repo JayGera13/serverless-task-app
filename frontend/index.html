@@ -37,7 +37,16 @@
             margin: 10px 0;
             border-radius: 4px;
             border: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
+        .delete-btn {
+            background: #cc0000;
+            padding: 6px 12px;
+            font-size: 14px;
+        }
+        .delete-btn:hover { background: #aa0000; }
     </style>
 </head>
 <body>
@@ -58,7 +67,10 @@
             list.innerHTML = '';
             tasks.forEach(task => {
                 const li = document.createElement('li');
-                li.textContent = task.title;
+                li.innerHTML = `
+                    <span>${task.title}</span>
+                    <button class="delete-btn" onclick="deleteTask('${task.taskID}')">Delete</button>
+                `;
                 list.appendChild(li);
             });
         }
@@ -73,6 +85,13 @@
                 body: JSON.stringify({ title })
             });
             input.value = '';
+            getTasks();
+        }
+
+        async function deleteTask(taskID) {
+            await fetch(`${API_URL}/tasks/${taskID}`, {
+                method: 'DELETE'
+            });
             getTasks();
         }
 
