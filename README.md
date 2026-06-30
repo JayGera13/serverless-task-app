@@ -21,6 +21,7 @@ http://jay-task-app.s3-website.us-east-2.amazonaws.com
 |--------|----------|-------------|
 | GET | /tasks | Retrieve all tasks |
 | POST | /tasks | Create a new task |
+| DELETE | /tasks/{taskID} | Delete a task by ID |
 
 ## AWS Services Used
 - AWS Lambda
